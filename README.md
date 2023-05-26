@@ -7,9 +7,28 @@ Templates sujetos a modificaciones.
 
 - Indicaciones para usar makefile
 
+Se espera la siguiente estructura de proyecto:
+
+DIRECTORIO_DEL_PROYECTO
+|- components
+|   |- archivos individuales (sin dependencias)
+|
+|- main
+|   |- archivo principal (del que se quiere hacer testbench)
+|
+|- source
+|   |- archivos que tengan dependencias de los componentes
+|
+|- testbench
+|   |- archivos de testbench
+|
+.gitignore
+makefile
+README.md
+
+    
+
 Se estableceran las instrucciones para el uso del makefile con comandos make.
-
-
 
 Previo a ejecutar un proyecto personal, se debe ingresar al makefile y configurar los siguientes parametros:
 - 'MAIN_FILE': Archivo a evaluar en testbench
