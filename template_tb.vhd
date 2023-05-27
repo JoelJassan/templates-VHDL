@@ -13,10 +13,10 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity tb_example is
+entity example_tb is
 end entity;
 
-architecture a_tb_example of tb_example is
+architecture a_example_tb of example_tb is
 
     ----- Typedefs --------------------------------------------------------------------------------
 
@@ -31,7 +31,7 @@ architecture a_tb_example of tb_example is
     --component inputs
 
     --component outputs
-    
+
 begin
     ----- Component to validate -------------------------------------------------------------------
     ex_component : entity work.componente_ejemplo
@@ -76,7 +76,7 @@ begin
     --
     --
     --
-	
+
     -- End of test
     stop : process
     begin
