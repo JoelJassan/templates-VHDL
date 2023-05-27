@@ -3,6 +3,7 @@
 ## Table of Contents
 1. [Formateador de codigo](#formateador-de-codigo)
 2. [Todo sobre el makefile](#todo-sobre-el-makefile)
+3. [Licencia](#Licencia)
 
 ## Formateador de codigo
 VHDL Formatter
@@ -71,3 +72,7 @@ Nota: si estos comandos se ejecutan en orden incorrecto, es probable que se obte
 * `make vcd`: genera un archivo temporal .vcd para eliminarse al hacer make clean (leer make clean)
 
 * `make clean`: elimina los archivos .vcd y .cf generados. 
+
+
+# Licencia
+Este código tiene licencia MIT. Ver `LICENSE.txt`.
