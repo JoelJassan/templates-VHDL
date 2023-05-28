@@ -16,7 +16,8 @@ EXT = .vhd
 # ghdl config
 TIME = 4000000ns
 GHDL_SIM_TIME = --stop-time=$(TIME)
-COMPILATION_VERSION = --std=08
+COMPILATION_VERSION = 08	#2008 standard de VHDL
+COMPILATION = --std=$(COMPILATION)
 
 
 .DEFAULT_GOAL := make
@@ -37,7 +38,7 @@ execute:
 	ghdl -e $(COMPILATION_VERSION) $(TB_FILE)
 
 run:
-	ghdl -r $(COMPILATION_VERSION) $(TB_FILE) $(GHDL_SIM_TIME) --vcd=$(MAIN_FILE)_tb.vcd
+	ghdl -r $(COMPILATION) $(TB_FILE) $(GHDL_SIM_TIME) --vcd=$(MAIN_FILE)_tb.vcd
 
 view:
 	gtkwave $(VCD_FILE)
@@ -47,4 +48,4 @@ vcd:
 
 clean: 
 	rm *.vcd
-	rm work-obj08.cf
+	rm work-obj$(COMPILATION_VERSION).cf
