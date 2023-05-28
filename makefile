@@ -14,10 +14,10 @@ EXT = .vhd
 
 
 # ghdl config
-TIME = 4000000ns
+TIME = 4ms
 GHDL_SIM_TIME = --stop-time=$(TIME)
 COMPILATION_VERSION = 08	#2008 standard de VHDL
-COMPILATION = --std=$(COMPILATION)
+COMPILATION = --std=08
 
 
 .DEFAULT_GOAL := make
@@ -48,4 +48,4 @@ vcd:
 
 clean: 
 	rm *.vcd
-	rm work-obj$(COMPILATION_VERSION).cf
+	rm work-obj08.cf

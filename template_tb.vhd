@@ -21,7 +21,9 @@ architecture a_example_tb of example_tb is
     ----- Typedefs --------------------------------------------------------------------------------
 
     ----- Constants -------------------------------------------------------------------------------
-    constant simulation_time : integer := 5000; --esto no funciona
+    constant clk_period: time := 10 ns;
+    constant rst_off_time: time := 80 ns;
+    constant simulation_time : time := 5000 ns; --esto no funciona
 
     ----- Simulation ------------------------------------------------------------------------------
 
@@ -43,26 +45,30 @@ begin
     reloj : process
     begin
         clk_i <= '0';
-        wait for 10 ns;
+        wait for clk_period;
         clk_i <= '1';
-        wait for 10 ns;
+        wait for clk_period;
     end process;
 
     -- reset stimulus
     reset : process
     begin
         rst_i <= '0';
-        wait for 80 ns;
+        wait for reset_off_time;
         rst_i <= '1';
         wait;
     end process;
 
     -- enable stimulus
-    enable : process
+    enable : process(rst_i)
     begin
-        enable_i <= '0';
-        wait for 100 ns; --espera habilitacion del reset
-        enable_i <= '1';
+    	if(rising_edge(rst_i) then
+            wait for 20 ns;
+            enable_i <= '1';
+        elsif(rst_i = '0') then
+            enable_i <= '0';
+        end if;
+        
         wait;
     end process;
 
