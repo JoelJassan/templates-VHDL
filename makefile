@@ -5,7 +5,7 @@ CMP_DIR = ./components
 TB_DIR  = ./testbench
 
 # archivos
-MAIN_FILE = 
+MAIN_FILE = oneHot_antirrebote
 TB_FILE = $(MAIN_FILE)_tb
 VCD_FILE = $(TB_FILE).vcd
 
@@ -14,10 +14,10 @@ EXT = .vhd
 
 
 # ghdl config
-TIME = 4ms
+TIME = 20ms
 GHDL_SIM_TIME = --stop-time=$(TIME)
 COMPILATION_VERSION = 08	#2008 standard de VHDL
-COMPILATION = --std=08
+COMPILATION = --std=$(COMPILATION_VERSION)
 
 
 .DEFAULT_GOAL := make
@@ -29,13 +29,18 @@ make: compile execute run
 all: compile execute run view
 
 compile:
-	ghdl -a $(COMPILATION_VERSION) $(CMP_DIR)/*.vhd
-	ghdl -a $(COMPILATION_VERSION) $(SRC_DIR)/*.vhd
-	ghdl -a $(COMPILATION_VERSION) $(MAIN_DIR)/*.vhd
-	ghdl -a $(COMPILATION_VERSION) $(TB_DIR)/*.vhd
+	ghdl -a $(COMPILATION) $(CMP_DIR)/*.vhd
+	ghdl -a $(COMPILATION) $(SRC_DIR)/*.vhd
+	ghdl -a $(COMPILATION) $(MAIN_DIR)/*.vhd
+	ghdl -a $(COMPILATION) $(TB_DIR)/*.vhd
 
+# order: cmp -> src -> main -> tb	
+backup:
+	
+	
+	
 execute:
-	ghdl -e $(COMPILATION_VERSION) $(TB_FILE)
+	ghdl -e $(COMPILATION) $(TB_FILE)
 
 run:
 	ghdl -r $(COMPILATION) $(TB_FILE) $(GHDL_SIM_TIME) --vcd=$(MAIN_FILE)_tb.vcd

@@ -1,11 +1,42 @@
-# Templates sujetos a modificaciones.
+# Template de README para VHDL
+Todos los templates estan sujeto a modificaciones.
+
 -------------------------------------------------
-## Table of Contents
-1. [Formateador de codigo](#formateador-de-codigo)
-2. [Todo sobre el makefile](#todo-sobre-el-makefile)
-3. [Licencia](#Licencia)
+
+**Table of Contents**
+- [Proyecto](#proyecto)
+- [Consideraciones](#consideraciones)
+- [Formateador de codigo](#formateador-de-codigo)
+- [Forma de uso](#forma-de-uso)
+
+
+
+## Proyecto
+
+Breve explicacion de como funciona el proyecto.
+Se evitará que esta explicacion tenga mas de 5 renglones (o 500 caracteres).
+
+
+## Consideraciones
+
+El archivo .gitignore incluye todas las extensiones que genera Quartus 2, ModelSim y GHDL en su ejecucion y compilacion.
+
+* Para ejecutar en FPGA
+Se necesita crear un proyecto en Quartus 2. 
+Sobre ese proyecto agregar todos los archivos, considerando la entidad de mayor jerarquía.
+
+* Para simulacion en GtkWave
+Es necesario tener las herramientas GHDL y GtkWave instaladas. Para distribuciones debian de linux basta con ejecutar los siguientes comandos:
+'sudo apt-get install GHDL'
+'sudo apt-get install gtkwave'
+Con esto bastaria para poder usar los comandos de @makefile
+
+* Para simulacion en modelsim (en caso de no usar GtkWave)
+Se debe generar el proyecto desde modelsim, e ir agregando los archivos .vhd
+
 
 ## Formateador de codigo
+
 VHDL Formatter
 En settings.json:
 ```
@@ -22,14 +53,16 @@ En settings.json:
 ```
 
 
-## Todo sobre el makefile
+## Forma de Uso
 
 Se espera la siguiente estructura de proyecto:
-
 ```
 DIRECTORIO_DEL_PROYECTO
 |- components
 |   |- archivos individuales (sin dependencias)
+|
+|- fpga
+|   |- todos los archivos y directorios generados en Quartus II al crear un proyecto
 |
 |- main
 |   |- archivo principal (del que se quiere hacer testbench)
@@ -41,17 +74,17 @@ DIRECTORIO_DEL_PROYECTO
 |   |- archivos de testbench
 |
 .gitignore
+LICENSE.txt
 makefile
 README.md
 ```
-
     
 
 Se estableceran las instrucciones para el uso del makefile con comandos make.
 
 Previo a ejecutar un proyecto personal, se debe ingresar al makefile y configurar los siguientes parametros:
 - `MAIN_FILE`: archivo a evaluar en testbench
-- `TIME`    : tiempo total de la simulacion
+- `TIME`    : tiempo total de la simulacion. Ahora este tiempo es controlable tambien desde los archivos de testbench
 
 Nota 1: puede que necesite cambiar el nombre de los directorios en la etiqueta #directorios del makefile (linea 1).
 Nota 2: makefile espera que el archivo de testbench tenga el mismo nombre que su archivo fuente. En caso de que sea distinto, reemplazar SRC_FILE en las lineas de makefile correspondientes.
