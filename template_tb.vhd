@@ -21,22 +21,23 @@ architecture a_example_tb of example_tb is
     ----- Typedefs --------------------------------------------------------------------------------
 
     ----- Constants -------------------------------------------------------------------------------
-    constant clk_period: time := 10 ns;
-    constant rst_off_time: time := 80 ns;
-    constant simulation_time : time := 5000 ns; --esto no funciona
 
     ----- Simulation ------------------------------------------------------------------------------
-
+    constant clk_period      : time := 10 ns;
+    constant reset_off_time  : time := 80 ns;
+    constant enable_off_time : time := 100 ns;
+    constant simulation_time : time := 5000 ns;
+    
     ----- Signals (i: entrada, o:salida, s:señal intermedia) --------------------------------------
     signal clk_i, rst_i, enable_i : std_logic;
 
     --component inputs
 
     --component outputs
-
+    
 begin
     ----- Component to validate -------------------------------------------------------------------
-    ex_component : entity work.componente_ejemplo
+    example : entity work.example_component
         generic map()
         port map();
     ----- Code ------------------------------------------------------------------------------------
@@ -60,15 +61,10 @@ begin
     end process;
 
     -- enable stimulus
-    enable : process(rst_i)
+    enable : process
     begin
-    	if(rising_edge(rst_i) then
-            wait for 20 ns;
-            enable_i <= '1';
-        elsif(rst_i = '0') then
-            enable_i <= '0';
-        end if;
-        
+        wait for enable_off_time;
+        enable_i <= '1';
         wait;
     end process;
 
@@ -86,7 +82,7 @@ begin
     -- End of test
     stop : process
     begin
-        wait for 5000 ns; --tiempo total de
+        wait for simulation_time; --tiempo total de
         std.env.stop;
     end process;
 
